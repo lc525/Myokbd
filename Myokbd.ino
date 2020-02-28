@@ -25,29 +25,34 @@
 
 #include "config.h"
 #include "PresentationRemote.h"
+#include "PresentationController.h"
 
 #include <mbed.h>
 #include <ble/BLE.h>
 #include <ble/gap/Gap.h>
-#include <ble/services/DeviceInformationService.h>
+/* #include <ble/services/DeviceInformationService.h> */
 
 using namespace mbed;
 using namespace myokbd;
 
-static events::EventQueue event_queue(10 * EVENTS_EVENT_SIZE);
-
-void schedule_ble_events(BLE::OnEventsToProcessCallbackContext *context) {
-    event_queue.call(Callback<void()>(&context->ble, &BLE::processEvents));
-}
+/* static events::EventQueue event_queue(20 * EVENTS_EVENT_SIZE);
+ * static events::EventQueue sensor_queue(10 * EVENTS_EVENT_SIZE);
+ * 
+ * void schedule_ble_events(BLE::OnEventsToProcessCallbackContext *context) {
+ *     event_queue.call(Callback<void()>(&context->ble, &BLE::processEvents));
+ * } */
 
 void setup() {
+  //Serial.begin(115200);
   BLEDevice &ble = BLEDevice::Instance();
-  ble.onEventsToProcess(schedule_ble_events);
+  /* ble.onEventsToProcess(schedule_ble_events); */
 
-  PresentationRemote pr(ble, event_queue, MYOKBD_BT_DEVICE_NAME);
+  PresentationRemote pr(ble);
   pr.start();
+  PresentationController(&pr, analogPinToPinName(A0));
 }
 
 void loop() {
-  // no need for any code here as we use event-based dispatching
+// execution path never reaches here; control passed to mbed event loop in
+// PresentationRemote
 }

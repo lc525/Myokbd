@@ -20,5 +20,7 @@
 #define SW_REV "v0.0.1"
 
 #define SERIAL_DEBUG 1
+#define KBD_BUF_SIZE 128
+#define LED_PWR P1_9
 
 #endif
