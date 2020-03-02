@@ -1,0 +1,15 @@
+# Myokbd
+
+A simple neural interface demo.
+
+The code implements functionality for turning an mbed OS - capable device into a
+bluetooth presenter (sending commands like "next slide", "previous slide",
+"blank screen" etc).
+
+In the implementation, those commands are triggered based on filtered analog
+input from a sensor measuring muscular contractions (MyoWare). A short
+contraction triggers "previous slide" while a longer one (550 ms) triggers
+"next slide".
+
+The code can also be used as a general example for implementing a bluetooth
+keyboard using embedded devices such as the Arduino Nano 33 BLE.

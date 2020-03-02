@@ -30,22 +30,14 @@
 #include <mbed.h>
 #include <ble/BLE.h>
 #include <ble/gap/Gap.h>
-/* #include <ble/services/DeviceInformationService.h> */
 
 using namespace mbed;
 using namespace myokbd;
 
-/* static events::EventQueue event_queue(20 * EVENTS_EVENT_SIZE);
- * static events::EventQueue sensor_queue(10 * EVENTS_EVENT_SIZE);
- * 
- * void schedule_ble_events(BLE::OnEventsToProcessCallbackContext *context) {
- *     event_queue.call(Callback<void()>(&context->ble, &BLE::processEvents));
- * } */
 
 void setup() {
   //Serial.begin(115200);
   BLEDevice &ble = BLEDevice::Instance();
-  /* ble.onEventsToProcess(schedule_ble_events); */
 
   PresentationRemote pr(ble);
   pr.start();
